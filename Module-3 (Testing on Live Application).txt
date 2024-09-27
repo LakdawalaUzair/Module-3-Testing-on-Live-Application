@@ -1,0 +1,290 @@
+Module-3 (Testing on Live Application)
+
+1. What is RDBMS.
+-> RDBMS (Relational Database Management System) is a type of database management system that 
+   stores data in tables with rows and columns, and allows relationships between different data sets. 
+   It uses SQL for querying and managing data. Examples include MySQL, Oracle, and PostgreSQL.
+
+2. What is SQL.
+-> SQL (Structured Query Language) is a standardized programming language used to manage, query, 
+   and manipulate relational databases. It is used for tasks like retrieving data, updating records, 
+   and creating or modifying database structures.
+
+3. Write SQL Commands.
+-> SQL commands:
+
+   1. Create a Database:
+      CREATE DATABASE database_name;
+
+   2. Create a Table:
+      CREATE TABLE table_name (
+       column1 datatype,
+       column2 datatype,
+       column3 datatype
+   );
+
+   3. Insert Data into a Table:
+      INSERT INTO table_name (column1, column2, column3)
+      VALUES (value1, value2, value3);
+
+   4. Select Data from a Table:
+      SELECT column1, column2
+      FROM table_name
+      WHERE condition;
+
+   5. Update Data in a Table:
+      UPDATE table_name
+      SET column1 = value1, column2 = value2
+      WHERE condition;
+
+   6. Delete Data from a Table:
+      DELETE FROM table_name
+      WHERE condition;
+
+   7. Drop a Table:
+      DROP TABLE table_name;
+
+   8. Alter a Table (Add Column):
+      ALTER TABLE table_name
+      ADD column_name datatype;
+
+   9. Create a View:
+      CREATE VIEW view_name AS
+      SELECT column1, column2
+      FROM table_name
+      WHERE condition;
+
+4. What is join?
+-> A JOIN in SQL is used to combine rows from two or more tables based on a related 
+   column between them. It allows retrieval of data spread across multiple tables in a relational database.
+
+5. Write type of joins.
+-> There are different types of JOINS:
+
+   1. INNER JOIN: Returns only the matching rows from both tables.
+      SELECT * FROM table1
+      INNER JOIN table2 ON table1.common_column = table2.common_column;
+
+   2. LEFT JOIN (or LEFT OUTER JOIN): Returns all rows from the left table and matched rows from the right table; unmatched rows will have `NULL` values.
+      SELECT * FROM table1
+      LEFT JOIN table2 ON table1.common_column = table2.common_column;
+
+   3. RIGHT JOIN (or RIGHT OUTER JOIN): Returns all rows from the right table and matched rows from the left table; unmatched rows will have `NULL` values.
+      SELECT * FROM table1
+      RIGHT JOIN table2 ON table1.common_column = table2.common_column;
+
+   4. FULL JOIN (or FULL OUTER JOIN): Returns all rows when there is a match in either table, or `NULL` if there is no match.
+      SELECT * FROM table1
+      FULL JOIN table2 ON table1.common_column = table2.common_column;
+
+   5. CROSS JOIN: Produces the Cartesian product of the two tables (i.e., every row in the first table is paired with every row in the second table).
+      SELECT * FROM table1
+      CROSS JOIN table2;
+
+   6. SELF JOIN: A join where a table is joined with itself, usually with table aliases to differentiate between instances of the table.
+      SELECT a.column1, b.column2
+      FROM table_name a, table_name b
+      WHERE a.common_column = b.common_column;
+
+6. How Many constraint and describes it self.
+-> In SQL, constraints are rules applied to columns in a table to enforce data integrity and consistency. Here are the primary types of constraints and their descriptions:
+
+   1. PRIMARY KEY: Uniquely identifies each record in a table. A table can have only one primary key, and the values in this column must be unique and not null.
+      CREATE TABLE table_name (
+       column1 datatype PRIMARY KEY,
+       column2 datatype
+   );
+
+   2. FOREIGN KEY: Ensures that the value in a column (or a set of columns) matches values in another table’s primary key column(s). This enforces referential integrity between tables.
+      CREATE TABLE table_name (
+       column1 datatype,
+       column2 datatype,
+       FOREIGN KEY (column1) REFERENCES other_table(column1)
+   );
+
+   3. UNIQUE: Ensures that all values in a column (or a set of columns) are unique across the table. Unlike the primary key, a table can have multiple unique constraints.
+      CREATE TABLE table_name (
+       column1 datatype UNIQUE,
+       column2 datatype
+   );
+
+   4. NOT NULL: Ensures that a column cannot have a NULL value. This constraint is often used for columns that are required to have data.
+      CREATE TABLE table_name (
+       column1 datatype NOT NULL,
+       column2 datatype
+   );
+
+   5. CHECK: Ensures that all values in a column meet a specific condition. This constraint is used to enforce domain integrity by limiting the values that can be inserted into a column.
+      CREATE TABLE table_name (
+       column1 datatype,
+       CHECK (column1 > 0)
+   );
+
+   6. DEFAULT: Provides a default value for a column when no value is specified during an insert operation. This constraint ensures that columns have a default value when none is provided.
+      CREATE TABLE table_name (
+       column1 datatype DEFAULT value,
+       column2 datatype
+   );
+
+   7. AUTO_INCREMENT (or SERIAL in some databases): Automatically generates a unique value for a column when a new record is inserted. Often used for primary key columns.
+      CREATE TABLE table_name (
+       column1 INT AUTO_INCREMENT PRIMARY KEY,
+       column2 datatype
+   );
+
+7. Difference between RDBMS vs DBMS.
+-> Here’s a comparison between RDBMS (Relational Database Management System) and DBMS (Database Management System):
+
+  1. Data Organization:
+      RDBMS:Stores data in a structured format using tables (rows and columns). Tables can have relationships with each other, making data retrieval and management more organized.
+      DBMS:Data is stored in a more general and less structured format, which may not involve tables. Data could be stored in files, objects, or other formats.
+
+  2. Data Relationships:
+      RDBMS:Supports relationships between tables using foreign keys and joins. This relational model allows for complex queries and data integrity.
+      DBMS:Generally does not support relationships between data elements. It may not enforce referential integrity or complex relationships.
+
+  3. Normalization:
+      RDBMS: Uses normalization techniques to reduce redundancy and ensure data integrity. Normalization involves organizing data into tables to minimize duplication.
+      DBMS: May not use normalization. Data may be stored in a denormalized format, which can lead to redundancy and inconsistency.
+
+  4. Query Language:
+      RDBMS: Uses SQL (Structured Query Language) for querying and managing data. SQL provides powerful querying capabilities and is widely used.
+      DBMS: May use various query languages or file-based operations. It might not have a standardized query language like SQL.
+
+  5. Data Integrity:
+      RDBMS:Enforces data integrity constraints such as primary keys, foreign keys, unique constraints, and more, to maintain accurate and consistent data.
+      DBMS:Typically does not enforce data integrity constraints as rigorously, leading to potential data inconsistencies.
+
+  6. ACID Properties:
+      RDBMS:Generally adheres to ACID (Atomicity, Consistency, Isolation, Durability) properties to ensure reliable transaction processing and data integrity.
+      DBMS:May not fully support ACID properties, which can affect the reliability of transactions and data integrity.
+
+  7. Use Cases:
+      RDBMS:Ideal for applications requiring complex queries, data integrity, and structured data relationships, such as financial systems, enterprise applications, and relational data analysis.
+      DBMS:Suitable for simpler applications or systems where complex data relationships and integrity constraints are less critical, such as smaller, less complex databases or applications with less structured data.
+
+8. What is API Testing.
+-> API Testing involves evaluating an API (Application Programming Interface) to ensure it meets its intended functionality, 
+   reliability, performance, and security. It focuses on testing the interactions between different software applications or systems through their APIs.
+
+9. Types of API Testing.
+-> API testing encompasses several types of testing, each focusing on different aspects of the API’s functionality and performance. Here are the main types of API testing:
+
+   1. Functional Testing:
+       Purpose: Verifies that the API performs its intended functions correctly and meets the specified requirements.
+       Focus: Checking if the API endpoints return the expected results for various inputs.
+
+   2. Integration Testing:
+       Purpose: Ensures that the API integrates properly with other systems or services.
+       Focus: Validating interactions between the API and other components or services.
+
+   3. Performance Testing:
+       Purpose: Assesses the API’s performance under different conditions.
+       Focus: Measuring response times, throughput, and scalability. Includes:
+       Load Testing: Checks the API’s behavior under normal and peak load conditions.
+       Stress Testing: Determines the API’s limits by testing it under extreme conditions.
+       Scalability Testing: Evaluates how well the API scales with increasing load.
+
+   4. Security Testing:
+       Purpose: Identifies vulnerabilities and ensures the API is secure from threats.
+       Focus: Testing for authentication, authorization, data protection, and potential security weaknesses such as SQL injection or cross-site scripting (XSS).
+
+   5. Usability Testing:
+       Purpose: Ensures that the API is user-friendly and easy to understand for developers.
+       Focus: Evaluating the clarity of documentation, ease of use, and consistency of the API.
+
+   6. Error Handling Testing:
+       Purpose: Verifies how the API handles invalid requests and error conditions.
+       Focus: Checking for appropriate error responses, status codes, and error messages.
+
+   7. Data Integrity Testing:
+       Purpose: Ensures that the API correctly processes and maintains data.
+       Focus: Validating that the data returned by the API matches the expected results and that no data corruption occurs.
+
+   8. Compliance Testing:
+       Purpose: Verifies that the API adheres to relevant standards, protocols, and regulations.
+       Focus: Ensuring the API complies with industry standards and legal requirements.
+
+   9. Compatibility Testing:
+       Purpose: Ensures that the API works correctly across different platforms, devices, and environments.
+       Focus: Testing the API’s functionality on various operating systems, browsers, and devices.
+
+10. What is Responsive Testing?
+-> Responsive Testing involves evaluating a website or web application to ensure it displays and functions correctly across various 
+   devices and screen sizes. The goal is to verify that the user interface adapts to different resolutions, orientations, and devices, 
+   such as desktops, tablets, and smartphones.
+
+11. Which types of tools are available for Responsive Testing.
+-> There are several types of tools available for Responsive Testing that help developers and testers ensure that websites and web applications are adaptable to various screen sizes, devices, and browsers. These tools can simulate different environments or offer real device testing for a comprehensive evaluation of responsiveness.
+
+   Types of Tools for Responsive Testing:
+
+   1. Browser Developer Tools
+       Google Chrome DevTools: Offers a device mode to simulate different screen resolutions, orientations, and devices.
+       Firefox Developer Tools: Similar to Chrome, it provides a responsive design mode for testing various devices and resolutions.
+       Safari Web Inspector: Allows responsive testing on macOS and iOS devices through simulation.
+
+   2. Online Responsive Testing Tools
+       Responsinator: A quick and simple tool to check how a website appears on popular device screen sizes.
+       Screenfly: Tests websites on various screen sizes and resolutions, including mobile, tablet, desktop, and even TVs.
+       Am I Responsive: Allows testing of a website's responsiveness across different devices, including desktop, tablet, and mobile screens.
+
+   3. Emulators and Simulators
+       BrowserStack: Provides real device cloud testing with access to a wide range of mobile and desktop devices for accurate responsive testing.
+       LambdaTest: Offers cross-browser testing and responsive design testing across various browsers and real devices.
+       Sauce Labs: Provides cloud-based access to real devices and browsers for responsive testing.
+
+   4. Responsive Design Testing Plugins and Extensions
+       Window Resizer (Chrome Extension): A tool to resize the browser window to emulate various screen sizes and resolutions.
+       Viewport Resizer: A Chrome and Firefox extension that allows you to test responsive breakpoints for websites quickly.
+
+   5. Cross-Browser Testing Tools
+       CrossBrowserTesting: Tests website responsiveness on real browsers, devices, and resolutions.
+       Ghostlab: Offers synchronized responsive testing across multiple devices at the same time.
+
+   6. Automated Responsive Testing Tools
+       Sizzy: A responsive design tool that allows you to view how your website looks on multiple devices at once.
+       Percy: A visual testing tool that provides automated screenshots of web pages across different devices and viewports for responsive testing.
+       Galen Framework: A layout testing tool designed for responsive design, helping automate the testing process and identify layout issues.
+
+   7. Real Device Testing Platforms
+       Perfecto: Provides real mobile device cloud testing for responsive design validation.
+       TestObject: Offers access to real Android and iOS devices to perform responsive and functional testing on real devices.
+
+12. What is the full form of .ipa, .apk  
+-> The full forms of .ipa and .apk are:
+
+   .ipa: iOS App Store Package  
+  (Used for iOS applications on Apple devices like iPhones and iPads.)
+
+   .apk: Android Package 
+  (Used for Android applications on devices running the Android operating system.) 
+
+13. How to create step for to open the developer option mode ON?
+-> To enable Developer Options on both Android and iOS devices, follow these steps:
+
+   For Android:
+    1. Open "Settings": Go to the device's Settings.
+    2. Navigate to "About Phone": Scroll down and tap on About Phone (sometimes it's under System on certain devices).
+    3. Find "Build Number": Locate the Build Number option.
+    4. Tap on "Build Number" 7 Times: Tap the Build Number 7 times in quick succession. You’ll see a message counting down the number of taps remaining to enable Developer Mode.
+    5. Enter Your PIN (if required): If you have a screen lock PIN or password, you’ll need to enter it.
+    6. Developer Options Enabled: A message will appear saying, "You are now a developer!"
+    7. Access Developer Options: Go back to Settings and you should now see Developer Options as a menu item. It is typically located under System or at the bottom of the main **Settings** page.
+
+   For iOS (Developer Mode for Developers):
+    1. Open "Settings": Go to the device's Settings.
+    2. Navigate to "Safari": Scroll down and tap Safari.
+    3. Open "Advanced" Settings: Scroll down and select Advanced.
+    4. Enable "Web Inspector": Toggle Web Inspector on. This will allow you to debug websites through Safari's developer tools when connected to a Mac.
+
+   For full iOS Developer Mode, you must connect the iPhone to Xcode on a Mac:
+    1. Open Xcode and connect your iPhone.
+    2. Go to Preferences > Accounts to add your Apple ID (developer account).
+    3. Open or create an app project, and select your connected iPhone as the build target.
+    4. Xcode will prompt you to enable Developer Mode on the iPhone.
+
+  This allows the device to run and debug apps directly from Xcode.
+
+14. To check.
+-> "To check" typically means to examine or verify something for accuracy, functionality, or correctness. If you're asking in a specific context, please clarify!
